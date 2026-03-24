@@ -1,0 +1,27 @@
+package com.capg.smartcourier.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.capg.smartcourier.feign.DeliveryClient;
+import com.capg.smartcourier.feign.TrackingClient;
+
+@Service
+public class AdminService {
+
+    @Autowired
+    private DeliveryClient deliveryClient;
+
+    @Autowired
+    private TrackingClient trackingClient;
+
+    public List<Object> getAllDeliveries() {
+        return deliveryClient.getAllDeliveries();
+    }
+
+    public List<Object> getTracking(String trackingNumber) {
+        return trackingClient.getTracking(trackingNumber);
+    }
+}

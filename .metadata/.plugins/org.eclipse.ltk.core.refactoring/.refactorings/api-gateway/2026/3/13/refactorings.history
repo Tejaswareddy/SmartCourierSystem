@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.capg.samrtcourier&apos; to &apos;com.capg.smartcourier&apos;&#x0D;&#x0A;- Original project: &apos;api-gateway&apos;&#x0D;&#x0A;- Original element: &apos;api-gateway/src/main/java/com.capg.samrtcourier&apos;&#x0D;&#x0A;- Renamed element: &apos;api-gateway/src/main/java/com.capg.smartcourier&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.capg.samrtcourier&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.capg.samrtcourier" name="com.capg.smartcourier" qualified="false" references="true" stamp="1774287964942" textual="false" version="1.0"/>
+</session>

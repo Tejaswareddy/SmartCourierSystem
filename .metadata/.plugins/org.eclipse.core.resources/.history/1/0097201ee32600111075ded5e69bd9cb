@@ -1,0 +1,5 @@
+package com.capg.smartcourier.dto;
+
+public class LoginRequest {
+
+}

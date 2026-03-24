@@ -1,0 +1,5 @@
+package com.capg.smartcourier.config;
+
+public class PasswordConfig {
+
+}

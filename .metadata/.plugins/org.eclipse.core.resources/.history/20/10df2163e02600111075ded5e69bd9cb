@@ -1,0 +1,5 @@
+package com.capg.smartcourier.security;
+
+public class JwtUtil {
+
+}

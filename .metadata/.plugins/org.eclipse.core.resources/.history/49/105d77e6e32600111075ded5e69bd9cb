@@ -1,0 +1,5 @@
+package com.capg.smartcourier.entity;
+
+public class User {
+
+}
