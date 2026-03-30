@@ -1,6 +1,7 @@
 package com.capg.smartcourier.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.util.List;
 
 @Entity
@@ -10,10 +11,25 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Tracking number is required")
+    @Pattern(regexp = "^[A-Z0-9]{10,20}$", message = "Tracking number must have 10-20 alphanumeric characters")
     private String trackingNumber;
+
+    @NotNull(message = "User ID is required")
+    @Positive(message = "User ID must be a positive number")
     private Long userId;
+
+    @NotBlank(message = "Service type is required")
+    @Pattern(regexp = "^(STANDARD|EXPRESS|OVERNIGHT|SAME_DAY)$", message = "Service type must be STANDARD, EXPRESS, OVERNIGHT, or SAME_DAY")
     private String serviceType;
+
+    @NotBlank(message = "Status is required")
+    @Pattern(regexp = "^(CREATED|PICKED|IN_TRANSIT|DELIVERED|FAILED|CANCELLED)$", message = "Status must be CREATED, PICKED, IN_TRANSIT, DELIVERED, FAILED, or CANCELLED")
     private String status;
+
+    @NotNull(message = "Total amount is required")
+    @Positive(message = "Total amount must be greater than 0")
+    @Digits(integer = 10, fraction = 2, message = "Total amount must have at most 10 integer digits and 2 decimal places")
     private Double totalAmount;
 
     // 🔗 One Delivery → One Parcel

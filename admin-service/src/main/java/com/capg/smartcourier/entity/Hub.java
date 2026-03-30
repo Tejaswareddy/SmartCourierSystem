@@ -1,6 +1,7 @@
 package com.capg.smartcourier.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 public class Hub {
@@ -9,11 +10,26 @@ public class Hub {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Hub name is required")
+    @Size(min = 3, max = 100, message = "Hub name must be between 3 and 100 characters")
     private String name;
+
+    @NotBlank(message = "Location is required")
+    @Size(min = 3, max = 100, message = "Location must be between 3 and 100 characters")
     private String location;
+
+    @NotBlank(message = "Address is required")
+    @Size(min = 5, max = 200, message = "Address must be between 5 and 200 characters")
     private String address;
+
+    @NotBlank(message = "Contact number is required")
+    @Pattern(regexp = "^[\\d\\s\\-\\+\\(\\)]{10,20}$", message = "Contact number must be valid (10-20 characters)")
     private String contactNumber;
+
+    @NotBlank(message = "Manager name is required")
+    @Size(min = 3, max = 100, message = "Manager name must be between 3 and 100 characters")
     private String manager;
+
     private boolean active;
 
     public Hub() {}

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.multipart.MultipartFile;
+import jakarta.validation.Valid;
 
 import com.capg.smartcourier.entity.Tracking;
 import com.capg.smartcourier.entity.Document;
@@ -44,7 +45,7 @@ public class TrackingController {
     private DeliveryProofService deliveryProofService;
 
     @PostMapping
-    public Tracking addTracking(@RequestBody Tracking tracking) {
+    public Tracking addTracking(@Valid @RequestBody Tracking tracking) {
         return trackingService.addTracking(tracking);
     }
 

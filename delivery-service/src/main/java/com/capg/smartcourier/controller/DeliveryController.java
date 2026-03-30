@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 
 import com.capg.smartcourier.service.DeliveryService;
 import com.capg.smartcourier.entity.Delivery;
@@ -29,7 +30,7 @@ public class DeliveryController {
 
     // CREATE
     @PostMapping
-    public Delivery create(@RequestBody Delivery delivery) {
+    public Delivery create(@Valid @RequestBody Delivery delivery) {
         return service.createDelivery(delivery);
     }
 

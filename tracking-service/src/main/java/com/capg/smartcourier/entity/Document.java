@@ -1,6 +1,7 @@
 package com.capg.smartcourier.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,12 +11,31 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "File name is required")
+    @Size(max = 255, message = "File name must not exceed 255 characters")
     private String fileName;
+
+    @NotBlank(message = "File type is required")
+    @Pattern(regexp = "^[a-zA-Z0-9/\\-+]{3,50}$", message = "File type must be valid (e.g., application/pdf)")
     private String fileType;
+
+    @NotNull(message = "File size is required")
+    @Positive(message = "File size must be greater than 0")
+    @Max(value = 104857600, message = "File size must not exceed 100 MB")
     private Long fileSize;
+
+    @NotBlank(message = "File path is required")
+    @Size(min = 3, max = 500, message = "File path must be between 3 and 500 characters")
     private String filePath;
+
+    @NotNull(message = "Delivery ID is required")
+    @Positive(message = "Delivery ID must be a positive number")
     private Long deliveryId;
+
+    @NotNull(message = "User ID is required")
+    @Positive(message = "User ID must be a positive number")
     private Long userId;
+
     private LocalDateTime uploadedAt;
 
     public Document() {}
