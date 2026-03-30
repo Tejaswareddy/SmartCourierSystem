@@ -2,6 +2,7 @@ package com.capg.smartcourier.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,63 @@ public class AdminService {
 
     public List<Object> getTracking(String trackingNumber) {
         return trackingClient.getTracking(trackingNumber);
+    }
+
+    // Dashboard stats
+    public Map<String, Object> getDashboardStats() {
+        Map<String, Object> stats = new HashMap<>();
+        List<Object> deliveries = getAllDeliveries();
+        
+        long totalDeliveries = deliveries.size();
+        long pendingDeliveries = deliveries.stream()
+            .filter(d -> d instanceof Map && "PENDING".equals(((Map<?, ?>) d).get("status")))
+            .count();
+        long completedDeliveries = deliveries.stream()
+            .filter(d -> d instanceof Map && "DELIVERED".equals(((Map<?, ?>) d).get("status")))
+            .count();
+        
+        stats.put("totalDeliveries", totalDeliveries);
+        stats.put("pendingDeliveries", pendingDeliveries);
+        stats.put("completedDeliveries", completedDeliveries);
+        stats.put("inTransitDeliveries", totalDeliveries - pendingDeliveries - completedDeliveries);
+        
+        return stats;
+    }
+
+    // Resolve delivery
+    public Object resolveDelivery(Long id, String status) {
+        Map<String, String> body = new HashMap<>();
+        body.put("status", status);
+        return deliveryClient.updateDelivery(id, body);
+    }
+
+    // Reports
+    public Map<String, Object> getReports() {
+        Map<String, Object> reports = new HashMap<>();
+        List<Object> deliveries = getAllDeliveries();
+        
+        // Simple aggregation
+        reports.put("totalDeliveries", deliveries.size());
+        reports.put("deliveriesByStatus", getDeliveriesByStatus(deliveries));
+        
+        return reports;
+    }
+
+    private Map<String, Long> getDeliveriesByStatus(List<Object> deliveries) {
+        Map<String, Long> statusCount = new HashMap<>();
+        for (Object obj : deliveries) {
+            if (obj instanceof Map) {
+                Map<?, ?> delivery = (Map<?, ?>) obj;
+                String status = (String) delivery.get("status");
+                statusCount.put(status, statusCount.getOrDefault(status, 0L) + 1);
+            }
+        }
+        return statusCount;
+    }
+
+    // Get all users (placeholder - would need auth service integration)
+    public List<Object> getAllUsers() {
+        // This would need to call auth service
+        return List.of(); // Placeholder
     }
 }

@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 8081
 
 spring:
   application:
@@ -17,10 +17,42 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
 eureka:
+  instance:
+    preferIpAddress: false
+    hostname: auth-service
+    port: 8081
+    nonSecurePort: 8081
+    nonSecurePortEnabled: true
   client:
     service-url:
-      defaultZone: http://eureka-server:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka
 
 jwt:
   secret: smartcouriersecretkeysmartcouriersecretkey
   expiration: 3600000
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    url: /v3/api-docs
+    enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  tracing:
+    sampling:
+      probability: 1.0
+
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans

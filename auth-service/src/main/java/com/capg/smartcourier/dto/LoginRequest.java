@@ -26,7 +26,7 @@ public class LoginRequest {
     	return password;
     }
     
-    public void serPassword(String password) {
+    public void setPassword(String password) {
     	this.password = password;
     }
 }

@@ -12,26 +12,61 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.smartcourier.service.AdminService;
+import com.capg.smartcourier.service.HubService;
+import com.capg.smartcourier.entity.Hub;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping({"/admin", "/api/admin"})
 public class AdminController {
 
     @Autowired
-    private AdminService service;
+    private AdminService adminService;
+
+    @Autowired
+    private HubService hubService;
     
     @PutMapping("/delivery/{id}")
     public Object updateDelivery(@PathVariable Long id, @RequestBody Map<String, String> body) {
-        return service.updateDelivery(id, body);
+        return adminService.updateDelivery(id, body);
     }
 
     @GetMapping("/deliveries")
     public List<Object> getAllDeliveries() {
-        return service.getAllDeliveries();
+        return adminService.getAllDeliveries();
     }
 
     @GetMapping("/tracking/{trackingNumber}")
     public List<Object> getTracking(@PathVariable String trackingNumber) {
-        return service.getTracking(trackingNumber);
+        return adminService.getTracking(trackingNumber);
+    }
+
+    // Admin Dashboard
+    @GetMapping("/dashboard")
+    public Map<String, Object> getDashboard() {
+        return adminService.getDashboardStats();
+    }
+
+    // Resolve delivery exception
+    @PutMapping("/deliveries/{id}/resolve")
+    public Object resolveDelivery(@PathVariable Long id, @RequestBody Map<String, String> body) {
+        return adminService.resolveDelivery(id, body.get("status"));
+    }
+
+    // Reports
+    @GetMapping("/reports")
+    public Map<String, Object> getReports() {
+        return adminService.getReports();
+    }
+
+    // User management
+    @GetMapping("/users")
+    public List<Object> getAllUsers() {
+        return adminService.getAllUsers();
+    }
+
+    // Hub management
+    @GetMapping("/hubs")
+    public List<Hub> getAllHubs() {
+        return hubService.getAllHubs();
     }
 }

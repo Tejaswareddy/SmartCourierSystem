@@ -12,15 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "delivery-service")
 public interface DeliveryClient {
 
-    @GetMapping("/api/deliveries")
+    @GetMapping("/deliveries")
     List<Object> getAllDeliveries();
     
-    @PutMapping("/api/deliveries/{id}")
+    @PutMapping("/deliveries/{id}")
     Object updateDelivery(@PathVariable Long id, @RequestBody Map<String, String> body);
-
-    // ⚠️ FIX: This endpoint doesn't exist in your delivery service yet
-    // So either remove OR implement PUT in delivery-service
-
-    // @PutMapping("/api/deliveries/{id}")
-    // Object updateDelivery(@PathVariable Long id, @RequestBody Map<String, String> body);
 }

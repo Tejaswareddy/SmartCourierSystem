@@ -5,4 +5,5 @@
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Value"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="com.capg.smartcourier.entity.User"/>
 </qualifiedTypeNameHistroy>

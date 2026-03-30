@@ -8,5 +8,5 @@ import com.capg.smartcourier.entity.Tracking;
 
 public interface TrackingRepository extends JpaRepository<Tracking, Long> {
 
-    List<Tracking> findByTrackingNumberOrderByIdAsc(String trackingNumber);
+    List<Tracking> findByTrackingNumber(String trackingNumber);
 }

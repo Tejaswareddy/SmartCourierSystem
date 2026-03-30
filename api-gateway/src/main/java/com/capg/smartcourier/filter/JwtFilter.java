@@ -40,12 +40,14 @@ public class JwtFilter implements GlobalFilter {
             return exchange.getResponse().setComplete();
         }
 
-        // ✅ pass username to downstream services (IMPORTANT)
+        // ✅ pass username and userId to downstream services (IMPORTANT)
         String username = jwtUtil.extractUsername(token);
+        Long userId = jwtUtil.extractUserId(token);
 
         ServerWebExchange mutatedExchange = exchange.mutate()
                 .request(exchange.getRequest().mutate()
                         .header("X-User", username)
+                        .header("X-User-Id", userId.toString())
                         .build())
                 .build();
 

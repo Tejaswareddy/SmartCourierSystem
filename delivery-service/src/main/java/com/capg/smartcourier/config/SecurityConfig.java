@@ -12,7 +12,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-            .csrf(csrf -> csrf.disable())
+            .csrf(csrf -> csrf.disable()) // for preventing the malicious data from the other users
             .authorizeHttpRequests(auth -> auth
                 .anyRequest().permitAll()
             );
