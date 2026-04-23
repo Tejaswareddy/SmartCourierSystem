@@ -46,7 +46,7 @@ export function renderRegisterPage(container, onRegisterSuccess) {
     const role = document.getElementById('role').value
 
     try {
-      const response = await fetch('http://localhost:8080/api/auth/register', {
+      const response = await fetch('http://localhost:8090/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

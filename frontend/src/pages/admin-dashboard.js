@@ -36,7 +36,7 @@ export function renderAdminDashboard(container, token, userId) {
   async function loadDashboard() {
     try {
       // Load admin dashboard stats
-      const dashResponse = await fetch('http://localhost:8080/api/admin/dashboard', {
+      const dashResponse = await fetch('http://localhost:8090/api/admin/dashboard', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -51,7 +51,7 @@ export function renderAdminDashboard(container, token, userId) {
       }
 
       // Load all deliveries
-      const delResponse = await fetch('http://localhost:8080/api/admin/deliveries', {
+      const delResponse = await fetch('http://localhost:8090/api/admin/deliveries', {
         headers: {
           'Authorization': `Bearer ${token}`
         }

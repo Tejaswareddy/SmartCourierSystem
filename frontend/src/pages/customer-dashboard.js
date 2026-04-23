@@ -104,7 +104,7 @@ export function renderCustomerDashboard(container, token, userId) {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/deliveries', {
+      const response = await fetch('http://localhost:8090/api/deliveries', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ export function renderCustomerDashboard(container, token, userId) {
   // Load deliveries
   async function loadDeliveries() {
     try {
-      const response = await fetch('http://localhost:8080/api/deliveries/my', {
+      const response = await fetch('http://localhost:8090/api/deliveries/my', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'X-User-Id': userId
